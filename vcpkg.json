@@ -1,0 +1,42 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "myapp",
+  "version": "1",
+  "vcpkg-configuration": {
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg-configuration.schema.json",
+    "default-registry": {
+      "kind": "git",
+      "repository": "https://github.com/microsoft/vcpkg",
+      "baseline": "000d1bda1ffa95a73e0b40334fa4103d6f4d3d48"
+    }
+  },
+  "features": {
+    "common-opencv-port": {
+      "description": "A single common for the whole repo port of OpenCV",
+      "dependencies": [
+        {
+          "name": "opencv4",
+          "default-features": false,
+          "features": [ "jpeg" ]
+        }
+      ]
+    },
+
+    "irrelevant-feature": {
+      "description": "heavy ports just for testing, they shouldn't be used",
+      "dependencies": [ "opencv3", "opencv2" ]
+    },
+
+    "myfeature": {
+      "description": "will use this feature only. common-opencv-port might be a dependency of many other features of this app",
+      "dependencies": [
+        {
+          "name": "myapp",
+          "default-features": false,
+          "features": [ "common-opencv-port" ]
+        }
+      ]
+    }
+  },
+  "dependencies": []
+}
